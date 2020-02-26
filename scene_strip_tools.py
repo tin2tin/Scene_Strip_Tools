@@ -53,7 +53,7 @@ from operator import attrgetter
 # Def currently not working
 
 
-def set3dViewGlobal():
+def set3d_view_global():
     for area in bpy.context.screen.areas:
         if area.type == 'VIEW_3D':
             space = area.spaces[0]
@@ -71,7 +71,7 @@ def set3dViewGlobal():
 oldStrip = ""
 
 
-def SwichCameraAtFrameChange(*pArgs):
+def swich_camera_at_frame_change(*pArgs):
 
     global oldStrip
     scn = bpy.context.scene
@@ -101,11 +101,11 @@ def SwichCameraAtFrameChange(*pArgs):
 #     Un/link 3D Cameras from/to Sequencer at frame change
 # ------------------------------------------------------------------------
 
-def attachAsHandler():
-    bpy.app.handlers.frame_change_pre.append(SwichCameraAtFrameChange)
+def attach_as_handler():
+    bpy.app.handlers.frame_change_pre.append(swich_camera_at_frame_change)
 
 
-def detachAsHandler():
+def detach_as_handler():
     bpy.app.handlers.frame_change_pre.clear()
 
 
@@ -115,7 +115,7 @@ def detachAsHandler():
 
 class PropertyGroup(bpy.types.PropertyGroup):
 
-    LinkSeqTo3DView: bpy.props.BoolProperty(
+    link_seq_to_3d_view: bpy.props.BoolProperty(
         name='Link Sequencer to 3D View',
         description='Let scene strips swich cameras in 3D Viewport')
 
@@ -142,24 +142,24 @@ class SEQUENCER_PT_scene_tools(Panel):
         col = col.box()
         manager = context.scene.asset_manager
 
-        col.prop(manager, "LinkSeqTo3DView", text="Link Sequencer to 3D Viewport", icon="LINKED")
+        col.prop(manager, "link_seq_to_3d_view", text="Link Sequencer to 3D Viewport", icon="LINKED")
         col.operator("view3d.add_scene_strip", text="Add Camera as Scene Strip", icon="CAMERA_DATA")
         col.operator("sequencer.convert_cameras", text="Convert Camera Markers to Strips", icon="MARKER")
         col.operator("sequencer.change_scene", text="Toggle Scene Strip", icon="VIEW3D")
 
         # check if bool property is enabled
-        if (context.scene.asset_manager.LinkSeqTo3DView == True):
-            SwichCameraAtFrameChange()
-            attachAsHandler()
+        if (context.scene.asset_manager.link_seq_to_3d_view == True):
+            swich_camera_at_frame_change()
+            attach_as_handler()
         else:
-            detachAsHandler()
+            detach_as_handler()
 
 
 # ------------------------------------------------------------------------
 #     Add Camera as Scene Strip in Sequencer
 # ------------------------------------------------------------------------
 
-class THREEDPREVIEW_PT_AddSceneStrip(bpy.types.Operator):
+class THREEDPREVIEW_PT_add_scene_strip(bpy.types.Operator):
     """Adds current camera as a scene strip to the Sequencer"""
     bl_idname = "view3d.add_scene_strip"
     bl_label = "Camera"
@@ -345,7 +345,7 @@ def menu_link_tdview(self, context):
     #col = col.use_property_split = True
     #col = col.alignment = 'RIGHT'
     manager = context.scene.asset_manager
-    col.prop(manager, "LinkSeqTo3DView", text="Link Sequencer to 3D Viewport")
+    col.prop(manager, "link_seq_to_3d_view", text="Link Sequencer to 3D Viewport")
 
 
 def menu_convert_markers(self, context):
@@ -354,7 +354,7 @@ def menu_convert_markers(self, context):
 
 
 classes = (
-    THREEDPREVIEW_PT_AddSceneStrip,
+    THREEDPREVIEW_PT_add_scene_strip,
     PropertyGroup,
     SEQUENCE_PT_convert_cameras,
     SEQUENCER_PT_scene_tools,
