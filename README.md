@@ -1,4 +1,4 @@
-# scene_strip_tools
+# Scene Strip Tools
 Scene Strip Tools - integrate the 3D View and the Sequencer in Blender
 
 Do Storyboarding and 3D Previz directly integrated with the Blender Video Sequencer:
