@@ -48,6 +48,7 @@ from bpy.props import BoolProperty, EnumProperty
 from bpy.types import Panel, Menu
 from rna_prop_ui import PropertyPanel
 from operator import attrgetter
+import os
 
 # Set 3D View to Global. Cameras can't be switched in local.
 # Def currently not working
@@ -175,6 +176,9 @@ class THREEDPREVIEW_PT_add_scene_strip(bpy.types.Operator):
         scene_name = bpy.context.scene.name
         ns = bpy.data.scenes[scene_name].copy()
         bpy.data.scenes[scene_name].use_fake_user = True
+        new_scene_name = os.path.splitext(ns.name)[0]+"_"+bpy.context.scene.camera.name
+        bpy.data.scenes[ns.name].name = new_scene_name
+        ns = bpy.data.scenes[ns.name]
 
         addSceneIn = cf
         addSceneOut = scn.frame_end
