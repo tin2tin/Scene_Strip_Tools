@@ -85,7 +85,7 @@ def swich_camera_at_frame_change(*pArgs):
             if i.type == "SCENE" and i.name != oldStrip:
                 if (i.frame_final_start <= cf
                 and i.frame_final_end > cf
-                and i.scene.name == bpy.context.scene.name  # Only if current scene in scene-strip
+                #and i.scene.name == bpy.context.scene.name  # Only if current scene in scene-strip
                 and not i.mute):
                     for area in bpy.context.screen.areas:
                         if area.type == 'VIEW_3D':
@@ -176,9 +176,9 @@ class THREEDPREVIEW_PT_add_scene_strip(bpy.types.Operator):
         scene_name = bpy.context.scene.name
         ns = bpy.data.scenes[scene_name].copy()
         bpy.data.scenes[scene_name].use_fake_user = True
-        new_scene_name = os.path.splitext(ns.name)[0]+"_"+bpy.context.scene.camera.name
-        bpy.data.scenes[ns.name].name = new_scene_name
-        ns = bpy.data.scenes[ns.name]
+#        new_scene_name = os.path.splitext(ns.name)[0]+"_"+bpy.context.scene.camera.name
+#        bpy.data.scenes[ns.name].name = new_scene_name
+#        ns = bpy.data.scenes[ns.name]
 
         addSceneIn = cf
         addSceneOut = scn.frame_end
@@ -299,6 +299,7 @@ class SEQUENCER_OT_scene_change(bpy.types.Operator):
             if strip.type == "SCENE":
                 if sequence.sequences_all[strip.name].scene_input == 'CAMERA' and strip.scene_camera != None:
                     camera = strip.scene_camera.name
+                    print(camera)
 
         if strip == None:                                                               # no active strip
             if values.prev_scene_change != "":                                           # a previous scene - go back
@@ -315,7 +316,7 @@ class SEQUENCER_OT_scene_change(bpy.types.Operator):
                 win.scene = bpy.data.scenes[values.prev_scene_change]
 
             elif strip.type == "SCENE":                                                 # correct strip type
-                strip_scene = bpy.context.scene.sequence_editor.active_strip.scene.name
+                strip_scene = bpy.context.scene.name
                 values.prev_scene_change = scene.name
 
                                                                                         # scene strip in 'Camera' and a camera is selected
