@@ -85,7 +85,7 @@ def swich_camera_at_frame_change(*pArgs):
             if i.type == "SCENE" and i.name != oldStrip:
                 if (i.frame_final_start <= cf
                 and i.frame_final_end > cf
-                #and i.scene.name == bpy.context.scene.name  # Only if current scene in scene-strip
+                and i.scene.name == bpy.context.scene.name  # Only if current scene in scene-strip
                 and not i.mute):
                     for area in bpy.context.screen.areas:
                         if area.type == 'VIEW_3D':
@@ -174,6 +174,7 @@ class THREEDPREVIEW_PT_add_scene_strip(bpy.types.Operator):
         seq = scn.sequence_editor
         cf = scn.frame_current
         scene_name = bpy.context.scene.name
+        bpy.data.scenes[scene_name].render.resolution_percentage = 100
         ns = bpy.data.scenes[scene_name].copy()
         bpy.data.scenes[scene_name].use_fake_user = True
 #        new_scene_name = os.path.splitext(ns.name)[0]+"_"+bpy.context.scene.camera.name
