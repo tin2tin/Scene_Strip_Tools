@@ -120,6 +120,10 @@ class SEQUENCER_PT_scene_tools(Panel):
     bl_label = "Scene Strip Tools"
     bl_category = "Scene Strip Tools"
 
+    @classmethod
+    def poll(cls, context):
+        return bpy.context.scene.sequence_editor
+
     def draw(self, context):
         layout = self.layout
 
@@ -177,9 +181,9 @@ class VIEW_3D_PT_add_scene_strip(bpy.types.Operator):
         addSceneTlStart = cf
         newScene = seq.sequences.new_scene('Scene', ns, addSceneChannel, addSceneTlStart)
         seq.sequences_all[newScene.name].scene_camera = bpy.data.objects[bpy.context.scene.camera.name]
-        seq.sequences_all[newScene.name].animation_offset_start = addSceneIn
+        seq.sequences_all[newScene.name].frame_offset_start = addSceneIn
         seq.sequences_all[newScene.name].frame_final_end = addSceneOut
-        seq.sequences_all[newScene.name].frame_start = cf
+        seq.sequences_all[newScene.name].frame_start = 0
 
         # Get the current scene
         original_scene = bpy.context.scene
