@@ -13,7 +13,7 @@ Do Storyboarding and 3D Previz directly integrated with the Blender Video Sequen
 * Switch to the scene of the active strip.
 
 ## Installation
-Download and install this file: https://github.com/tin2tin/scene_strip_tools/archive/refs/heads/linked.zip
+Download and install this file: https://github.com/tin2tin/Scene_Strip_Tools/releases/download/Scene_Strip_tools/Scene_Strip_Tools.zip
 
 ## Location
 
