@@ -120,10 +120,6 @@ class SEQUENCER_PT_scene_tools(Panel):
     bl_label = "Scene Strip Tools"
     bl_category = "Scene Strip Tools"
 
-    @classmethod
-    def poll(cls, context):
-        return bpy.context.scene.sequence_editor
-
     def draw(self, context):
         layout = self.layout
 
