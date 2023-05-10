@@ -84,7 +84,7 @@ def swich_camera_at_frame_change(*pArgs):
 
     try:
         for seq in sequences:
-            if hasattr(seq, 'type') and seq.type == 'SCENE' and seq.name != oldStrip:
+            if hasattr(seq, 'type') and seq.type == 'SCENE' and seq.scene_camera.name != oldStrip:
                 if seq.scene.name[:-4] == scene.name and not seq.mute:
                     if seq.frame_final_start <= cf < seq.frame_final_end:
                         for area in bpy.context.screen.areas:
