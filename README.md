@@ -7,7 +7,7 @@ Do Storyboarding and 3D Previz directly integrated with the Blender Video Sequen
 ## Features
 
 * Add cameras from 3D View to the Sequencer as Scene strips.
-* Switch camera in the 3D View according to the timings in the Sequencer.
+* Switch camera in the 3D View according to the Scene Strip timings in the Sequencer.
 * Convert Camera Markers to scene strips.
 * Switch to the scene of the active strip.
 
